@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive color picker</title>
+    <style>
+       body {
+        font-family: Poppins,sans-serif;
+       }
+       
+       #main {
+        display: flex;
+        width: 80%;
+        margin: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:20px;
+       }
+
+        #inputField{
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 20px;
+            border-radius: 10px;
+            border: 1px solid gray;
+            outline:0;
+        }
+
+        #colorDiv {
+            height: 400px;
+            width: 600px;
+            border: 2px dashed lightblue;
+            border-radius: 10px;
+
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+   function App () {
+     
+    let [color,setColor] = React.useState("");
+
+    function handleColorChange (event) {
+        setColor(event.target.value)
+    }
+
+
+    let colorBackGround = {
+        backgroundColor :color
+    }
+
+    if(color.length >7) {
+        alert("Invalid Hex code");
+        setColor("");
+    }else {
+        return (
+        <div id = "main">
+            <h1>Interactive Color Finder</h1>
+           <input type="text" value={color}  placeholder="Enter the color Hex code.."onChange = {handleColorChange} id="inputField"/>
+           <div id="colorDiv" style={colorBackGround} ></div>
+        </div>
+    )
+    }
+   }
+
+    let rootElement = ReactDOM.createRoot(document.getElementById("root"));
+    rootElement.render(<App/>)
+  </script>
+</html>
